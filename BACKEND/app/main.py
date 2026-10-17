@@ -15,8 +15,9 @@ from fastapi.responses import JSONResponse
 from app.core.config import settings
 from app.core.database import engine, Base, SessionLocal
 from app.api.v1.router import api_router
+from app.models.company import Company
 from app.models.user import User, UserRole
-from app.models.store import Store, Shift, ShiftStatus
+from app.models.store import Store, Shift, ShiftStatus, BranchType
 from app.models.product import Category, Product, UnitType
 from app.models.inventory import Inventory
 from app.core.security import get_password_hash
@@ -24,17 +25,41 @@ from app.core.security import get_password_hash
 
 def seed_initial_demo_data():
     """
-    Seeds initial store, demo cashier/admin, fish categories, products, and starting stock.
+    Seeds initial company, store, demo cashier/admin, fish categories, products, and starting stock.
     """
     db = SessionLocal()
     try:
+        # 0. Seed Company
+        company = db.query(Company).filter(Company.code == "COMP-001").first()
+        if not company:
+            company = Company(
+                code="COMP-001",
+                legal_name="Meanomeen Seafood Private Limited",
+                trade_name="Meanomeen Fresh Seafood",
+                gstin="33AAAAA0000A1Z5",
+                registered_address="142, DB Road, RS Puram, Coimbatore - 641002",
+                city="Coimbatore",
+                state="Tamil Nadu",
+                pincode="641002",
+                phone="+91 98422 12345",
+                email="corporate@meanomeen.com"
+            )
+            db.add(company)
+            db.flush()
+
         # 1. Seed Store
         store = db.query(Store).filter(Store.code == settings.DEFAULT_STORE_CODE).first()
         if not store:
             store = Store(
+                company_id=company.id if company else None,
                 code=settings.DEFAULT_STORE_CODE,
                 name=settings.DEFAULT_STORE_NAME,
+                branch_type=BranchType.RETAIL_STORE,
                 address="142, DB Road, RS Puram, Coimbatore - 641002",
+                city="Coimbatore",
+                state="Tamil Nadu",
+                pincode="641002",
+                gstin="33AAAAA0000A1Z5",
                 phone="+91 98422 12345",
                 email="store@fishpos.local"
             )
