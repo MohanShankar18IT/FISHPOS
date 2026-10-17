@@ -1,0 +1,115 @@
+# ==========================================
+# Fish POS - .gitignore
+# ==========================================
+
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Python & Backend
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Python Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Testing, Quality & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+
+# Databases & Local Storage
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+BACKEND/fish_pos.db
+
+# Node & Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Frontend Build Output
+FRONTEND/dist/
+FRONTEND/dist-ssr/
+dist/
+dist-ssr/
+coverage/
+
+# Vite temporary / cache files
+*.tsbuildinfo
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
+
+# Local Node extraction & standalone runtime binaries
+node_bin/
+temp_node/
+*.zip
+_.agents/
+
+# IDE & Editor Settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# Logs & Temporary Files
+logs/
+*.log
+scratch/
+tmp/
+temp/
